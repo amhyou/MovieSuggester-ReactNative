@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import MovieListItem from "../components/MovieListItem";
-
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -47,7 +47,7 @@ export default function Home() {
         value={searchQuery}
       />
       {
-        movies.map((movie, index) => <MovieListItem key={index} movie={movie} />)
+        movies.length !== 0 ? movies.map((movie, index) => <MovieListItem key={index} movie={movie} />) : <ActivityIndicator animating={true} color={MD2Colors.blue400} size={"large"} style={{ marginTop: 10 }} />
       }
 
     </ScrollView>
