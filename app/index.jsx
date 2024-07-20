@@ -32,7 +32,9 @@ export default function Home() {
     const response = await fetch("https://movies.amhyou.com/search?query_term=" + search);
     const data = await response.json();
     console.log(data)
-    setMovies(data.data.movies);
+    if (data.data.movies) {
+      setMovies(data.data.movies);
+    }
   };
 
   React.useEffect(() => {

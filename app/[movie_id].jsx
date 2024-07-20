@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { ScrollView, Text } from 'react-native';
 import MovieDetail from "../components/MovieDetail";
 import AppBar from '../components/AppBar';

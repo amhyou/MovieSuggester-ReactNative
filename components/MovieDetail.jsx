@@ -1,8 +1,21 @@
-import { Card, Text, Button, Avatar } from 'react-native-paper';
+import { Card, Text } from 'react-native-paper';
 import { router } from 'expo-router';
-import { ImageBackground, StyleSheet, Image, View, ScrollView } from 'react-native';
+import React from 'react';
+import { ImageBackground, StyleSheet, Image, View, ScrollView, TouchableOpacity } from 'react-native';
 
 export default function MovieListItem({ movie }) {
+    const [suggestions, setsuggestions] = React.useState([])
+
+    const fetchSuggestions = async () => {
+        const response = await fetch("https://movies.amhyou.com/suggestions?movie_id=" + movie.id);
+        const data = await response.json();
+        console.log(data)
+        setsuggestions(data.data.movies);
+    }
+    React.useEffect(() => {
+        setTimeout(fetchSuggestions, 1000)
+    }, [])
+
     return (
         <ScrollView>
             <ImageBackground source={{ uri: movie.background_image }} style={styles.background}>
@@ -22,6 +35,22 @@ export default function MovieListItem({ movie }) {
             <Card mode='outlined' style={{ marginHorizontal: 0, marginVertical: 0 }}>
                 <Card.Cover source={{ uri: movie.large_screenshot_image3 }} style={{ borderRadius: 0 }} />
             </Card>
+            {
+                suggestions.length !== 0 && <View style={{ backgroundColor: 'grey' }}><Text variant="displaySmall">Suggestions:</Text></View>
+            }
+            {
+                suggestions.length !== 0 && <View style={{ backgroundColor: 'grey' }}>
+                    <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-around', alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => { router.replace(`/${suggestions[0].id}`); }}><Image source={{ uri: suggestions[0].medium_cover_image }} style={styles.image} /></TouchableOpacity>
+                        <TouchableOpacity onPress={() => { router.replace(`/${suggestions[1].id}`); }}><Image source={{ uri: suggestions[1].medium_cover_image }} style={styles.image} /></TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-around', alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => { router.replace(`/${suggestions[2].id}`); }}><Image source={{ uri: suggestions[2].medium_cover_image }} style={styles.image} /></TouchableOpacity>
+                        <TouchableOpacity onPress={() => { router.replace(`/${suggestions[3].id}`); }}><Image source={{ uri: suggestions[3].medium_cover_image }} style={styles.image} /></TouchableOpacity>
+                    </View>
+                </View>
+            }
+
         </ScrollView>
     )
 }
@@ -47,9 +76,10 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     image: {
-        width: 300,
-        height: 300,
-        marginRight: 0,
+        width: 150,
+        height: 100,
+        marginHorizontal: 5,
+        marginVertical: 5,
         borderRadius: 5,
     },
     plot: {
