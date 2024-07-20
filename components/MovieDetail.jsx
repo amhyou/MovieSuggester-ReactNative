@@ -36,10 +36,10 @@ export default function MovieListItem({ movie }) {
                 <Card.Cover source={{ uri: movie.large_screenshot_image3 }} style={{ borderRadius: 0 }} />
             </Card>
             {
-                suggestions.length !== 0 && <View style={{ backgroundColor: 'grey' }}><Text variant="displaySmall">Suggestions:</Text></View>
+                suggestions.length == 4 && <View style={{ backgroundColor: 'grey' }}><Text variant="displaySmall">Suggestions:</Text></View>
             }
             {
-                suggestions.length !== 0 && <View style={{ backgroundColor: 'grey' }}>
+                suggestions.length == 4 && <View style={{ backgroundColor: 'grey' }}>
                     <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-around', alignItems: "center" }}>
                         <TouchableOpacity onPress={() => { router.replace(`/${suggestions[0].id}`); }}><Image source={{ uri: suggestions[0].medium_cover_image }} style={styles.image} /></TouchableOpacity>
                         <TouchableOpacity onPress={() => { router.replace(`/${suggestions[1].id}`); }}><Image source={{ uri: suggestions[1].medium_cover_image }} style={styles.image} /></TouchableOpacity>

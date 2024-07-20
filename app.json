@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "movies-recom",
-    "slug": "movies-recom",
-    "scheme": "myapp",
-    "version": "1.0.0",
+    "name": "Movie Suggester",
+    "slug": "movie-suggester",
+    "scheme": "movie-suggester",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -19,13 +19,22 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "come.amhyou.movie.suggester"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "88ab4d2c-bdcc-4564-beff-88bf2b332cb2"
+      }
+    }
   }
 }
